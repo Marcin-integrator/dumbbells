@@ -18,7 +18,20 @@ def weights_order(discs, amt):
 
     discs_sequence = sorted(discs_combi, key=itemgetter(-1))
 
-    list_str = '\n'.join([str(elem) for elem in discs_sequence])
+    discs_string = []
+
+    for weights in discs_sequence:
+        curr_str = ''
+        if len(weights) == 1:
+            discs_string.append(f"{str(weights[0])}")
+        else:
+            for weight in weights[:-1]:
+                curr_str = f" + {weight}" + curr_str
+            curr_str = curr_str.lstrip('+ ')
+            curr_str += f" = {weights[-1]}"
+            discs_string.append(curr_str)
+
+    list_str = '\n'.join([str(elem) for elem in discs_string])
 
     summary = ("Combinations are:\n" + list_str)
 
