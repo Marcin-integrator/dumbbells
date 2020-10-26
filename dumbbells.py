@@ -1,10 +1,24 @@
+from itertools import combinations
+from operator import itemgetter
+
+
 def weights_order(discs, amt):
     discs.sort()
-    for d in range(amt - 1):
-        xy = discs[d] + discs[d + 1]
-        discs.append(f"{discs[d + 1]} + {discs[d]} = {xy}")
+    combi = []
+    discs_combi = [[xix] for xix in discs]
+    for quantity in range(2, amt + 1):
+        combi.append(list(combinations(discs, quantity)))
 
-    list_str = '\n'.join([str(elem) for elem in discs])
+    for y in range(len(combi)):
+        for z in combi[y]:
+            z = list(z)
+            total = sum(z)
+            z.append(total)
+            discs_combi.append(z)
+
+    discs_sequence = sorted(discs_combi, key=itemgetter(-1))
+
+    list_str = '\n'.join([str(elem) for elem in discs_sequence])
 
     summary = ("Combinations are:\n" + list_str)
 
