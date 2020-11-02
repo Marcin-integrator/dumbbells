@@ -9,12 +9,12 @@ def weights_order(discs, amt):
     for quantity in range(2, amt + 1):
         combi.append(list(combinations(discs, quantity)))
 
-    for y in range(len(combi)):
-        for z in combi[y]:
-            z = list(z)
-            total = sum(z)
-            z.append(total)
-            discs_combi.append(z)
+    for total_lenght in range(len(combi)):
+        for spec_combi in combi[total_lenght]:
+            spec_combi = list(spec_combi)
+            total = sum(spec_combi)
+            spec_combi.append(total)
+            discs_combi.append(spec_combi)
 
     discs_sequence = sorted(discs_combi, key=itemgetter(-1))
 
@@ -42,7 +42,7 @@ if __name__ == "__main__":
     amount = int(input('Please type the number of discs:'))
     weights_list = []
     for x in range(amount):
-        kilos = float(input('Disc weight:'))
+        kilos = float(input('Disc weight (in kg):'))
         weights_list.append(kilos)
-    res = weights_order(weights_list, amount)
-    print(res)
+    RESULT = weights_order(weights_list, amount)
+    print(RESULT)
